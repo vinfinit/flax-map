@@ -22,7 +22,7 @@ const locationList = [
   , [create_address('Coopérative Agricole LInière de la Région d’Abbeville (CALIRA), 18 Route départementale, 80140 Martainneville, Somme')]
   , [create_address('Coopérative Agricole Linière du Nord de Caen, Rue des Buissons, 14610 Villons-les-Buissons')]
   , [create_address('SOC Cooperative Agricole L.A. Linière, 73 Route de Looberghe, 59630 Bourbourg')]
-  , [create_address('Coopérative de Linière FONTAINE le dun-CANY, Saint Pierre Le Viger, 76740 Seine-Maritime ')]
+  // , [create_address('Coopérative de Linière FONTAINE le dun-CANY, Saint Pierre Le Viger, 76740 Seine-Maritime ')]
   , [create_address('COOPÉRATIVE DE TEILLAGE DE LIN DU VERT GALANT, 54 Route du Vert Galant, 76690 Saint-André-sur-Cailly')]
   , [create_address('COOPERATIVE AGRICOLE Lin 2000 SCA, 20 Avenue Saget, 60210 Grandvilliers (там же - Cuma Liniere de Grandvilliers)')]
   , [create_address("Coopérative Agricole Linière, Rue de l'Étoile, 14630 Cagny")]
@@ -46,24 +46,72 @@ const locationList = [
   , [create_address('Liniere Du Ressault - Etablis Lamerant S.A., Rue Alexandre Duval, 27110 Le Neubourg')]
   , [create_address('Teillage Brille-Lamerant, Rue Alexandre Duval, 27110 Le Neubourg')]
   // , [create_address('Teillage de lin Lievin  (MADAME SIMONNE LIEVIN), 22 Grand’ Rue  62140 REGNAUVILLE Région: Nord Pas De Calais')]
+
+  , [
+    create_address('Чаусский Льнозавод ОАО')
+    , create_address('Шкловский Льнозавод ОАО')
+    // , create_address('Участок по возделыванию льна, г. Чаусы')
+  ]
+  , [create_address('ОАО "Горкилён", Могилёвская область, г. Горки, ул. Черникова, 8', [54.257967, 30.985080])]
+  , [create_address('ОАО "Хотимский льнозавод", Могилевская область, гп. Хотимск, ул. Льнозаводская, 9', [53.396270, 32.584729])]
+  , [create_address('ОАО "Мстиславльлен", Г. Мстиславль, п. Печковка', [54.023277, 31.763841])]
+  , [create_address('ОАО "Любанский льнозавод", Минская обл., Любанский р-н, гп. Любань, Улица Боровика, 1', [52.813821, 28.027962])]
+  , [create_address('ОАО "Красненский льнозавод", Минская область, Молодечненский р-н, д. Красное, ул. Лесная, 1/а', [54.275928, 27.040194])]
+  , [create_address('ОАО "Воложинский льнокомбинат"')]
+  , [create_address('ОАО "Крупский льнозавод"', [54.304773, 29.009242])]
+  , [create_address('ОАО "Слуцкий льнозавод", 223610 Минская область, г. Слуцк , ул. Ленина, 300', [53.043711, 27.616484])]
+  , [create_address('Филиал "Кормянский льнозавод" ОАО "Гомельлен"', [53.128038, 30.861029])]
+  , [create_address('филиал "Уваровичский льнозавод" ОАО "Гомельлен", Гомельская обл. Буда-Кошелёвский район д. Кривск', [52.592467, 30.525733])]
+  , [create_address('Речицкий Цех Кормянского Льнозавода Филиала ОАО Гомельлён', [52.386372, 30.355892])]
+  , [create_address('ОАО "Ляховичский льнозавод"', [53.0049767,26.2092848])]
+  , [create_address('ОАО "Пружанский льнозавод"')]
+  , [create_address('Участок Лида ОАО "Кореличилен", Лидский р-н, д Доржи', [53.7621813,25.3870851])]
+  , [create_address('ОАО "Кореличи-лен", Гродненская область, г.п.Кореличи')]
+  , [create_address('ОАО "Дворецкий льнозавод"', [53.416875, 25.568207])]
+  , [create_address('ОАО Дворецкий льнозавод производственный участок "Слоним"', [53.0894688,25.3726562])]
+  , [create_address('Филиал "Бешенковичский льнозавод" ОАО "Приозерный мир"', [55.075847, 29.508797])]
+  , [create_address('ОАО "Верхнедвинский льнозавод" 211620,Витебская область, ГОС а/я № 1, г.Верхнедвинск', [55.749681, 27.933658])]
+  , [create_address('ОАО "Кохановский льнозавод", 211060, Витебская область, Толочинский р-н, п/о Матюхово, д.Зеленый бор', [54.478927, 29.998060])]
+  , [create_address('ОАО "Лиозненский льнозавод", 211220, Витебская область,г.п.Лиозно, ул.Гагарина', [54.8879859,30.6409629])]
+  , [create_address('ОАО "Миорский льнозавод", 211930,Витебская область, ул.Заводская, г.Миоры', [55.611359, 27.621004])]
+  , [create_address('ОАО "Мосарлен"', [55.234677, 27.472198])]
+  , [create_address('ОАО "Поставский льнозавод"', [55.124197, 26.820771])]
+  , [create_address('ОАО "Дубровенский льнозавод"', [54.5770056,30.6671155])]
+  , [create_address('ОАО "Ореховский льнозавод", Витебская обл. Оршанский р-н', [54.671936, 30.486181])]
 ];
 
-function create_address(label) {
+function locToLatLng(location) {
+  let res = {};
+  if (location) {
+    res.lat = location[0];
+    res.lng = location[1];
+    return res
+  }
+  return null
+}
+
+function create_address(label, location=null) {
   return {
     label: label.split(',')[0]
+    , location: locToLatLng(location)
     , uri: encodeURIComponent(label)
   }
 }
 
 Promise.map(locationList, locationGroup => {
-  return Promise.map(locationGroup, location => {
+  return Promise.map(locationGroup, factory => {
+    if (factory.location) {
+      return Promise.resolve()
+    }
     return rp({
-      uri: `https://maps.googleapis.com/maps/api/geocode/json?address=${location.uri}&key=${apiKey}`
+      uri: `https://maps.googleapis.com/maps/api/geocode/json?address=${factory.uri}&key=${apiKey}`
       , json: true
     })
       .then(data => {
+        if (!factory.location) {
+          factory.location = data.results[0].geometry.location
+        }
         // console.log(data.results[0])
-        location.location = data.results[0].geometry.location
       })
   })
 })
