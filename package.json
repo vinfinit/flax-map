@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "build": "webpack",
+    "load": "node src/build.js"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {
+    "jsonfile": "^4.0.0",
+    "webpack": "^3.10.0"
+  }
+}
