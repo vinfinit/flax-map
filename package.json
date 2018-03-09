@@ -5,6 +5,7 @@
   },
   "dependencies": {
     "bluebird": "^3.5.1",
+    "hashmap": "^2.3.0",
     "request-promise": "^4.2.2"
   },
   "devDependencies": {
