@@ -75,7 +75,7 @@ module.exports = (map) => {
           };
 
           const area = new google.maps.Rectangle({
-            strokeColor: '#5ccccc'
+            strokeColor: '#04fbff'
             , strokeWeight: 1
             , map: map
             , bounds: areaBounds

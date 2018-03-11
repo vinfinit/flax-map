@@ -1,3 +1,6 @@
+const geometryutil = require('../../util/geometryutil');
+const mathutil = require('../../util/mathutil');
+
 module.exports = (map) => {
   let bounds = {
     north: 49.52,
@@ -28,19 +31,12 @@ module.exports = (map) => {
   google.maps.event.addListener(rectangle, 'bounds_changed', bounds_changed_handler);
 
   function bounds_changed_handler() {
-    let ne = rectangle.getBounds().getNorthEast();
-    let sw = rectangle.getBounds().getSouthWest();
-    let southWest = new google.maps.LatLng(sw.lat(), sw.lng());
-    let northEast = new google.maps.LatLng(ne.lat(), ne.lng());
-    let southEast = new google.maps.LatLng(sw.lat(), ne.lng());
-    let northWest = new google.maps.LatLng(ne.lat(), sw.lng());
-
-    let contentString =
-      'Area: ' + google.maps.geometry.spherical.computeArea([northEast, northWest, southWest, southEast])/1000000 + ' km^2';
-    // Set the info window's content and position.
+    const center = geometryutil.center.rectangle(rectangle);
+    const area = geometryutil.area.rectangle(rectangle);
+    const convertArea = mathutil.precisionRound(area/1000000, 3);
+    let contentString = `Area: ${convertArea} km^2`;
     infoWindow.setContent(contentString);
-    infoWindow.setPosition(ne);
-
+    infoWindow.setPosition(center);
     infoWindow.open(map);
   }
 
