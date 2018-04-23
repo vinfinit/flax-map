@@ -26,7 +26,13 @@ module.exports = (map) => {
       let circles = marker_circle_map.get(marker);
       if (!circles) {
         let pos = marker.getPosition();
-        circles = draw_circle(pos, event.Ga.altKey);
+        let keys = Object.keys(event);
+        let mouseEventName = keys.find(key => event[key] instanceof MouseEvent);
+        if (mouseEventName) {
+          circles = draw_circle(pos, event[mouseEventName].altKey);
+        } else {
+          circles = draw_circle(pos);
+        }
         marker_circle_map.set(marker, circles);
       } else {
         circles.forEach(circle => circle.setMap(null));
@@ -36,7 +42,7 @@ module.exports = (map) => {
   }
 
   const radius = [1, 2, 3, 5, 8, 13, 21, 34];
-  function draw_circle(center, withNetwork) {
+  function draw_circle(center, withNetwork=true) {
     let circles = [];
     let network = [];
 
