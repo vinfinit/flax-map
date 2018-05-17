@@ -7,12 +7,12 @@ const file = './data/location.json';
 
 const locationList = [
   [
-    create_address('TERRE DE LIN, 605 Route de la Vallée, 76740 Saint-Pierre-le-Viger')
-    , create_address('TERRE DE LIN, 4 Route Linerie, 76590 Crosville-sur-Scie')
+    // create_address('TERRE DE LIN, 605 Route de la Vallée, 76740 Saint-Pierre-le-Viger')
+    create_address('TERRE DE LIN, 4 Route Linerie, 76590 Crosville-sur-Scie')
     , create_address('TERRE DE LIN, Les Pistes Zi N 2, 27190 Conches-en-Ouche')
     , create_address('TERRE DE LIN, Rue du Roumois, 27350 Routot')
     , create_address('TERRE DE LIN, 12 Rue du Dessous des Bois, 76450 Vittefleur')
-    , create_address('TERRE DE LIN, Route de Pulcheux76630 Douvrend')
+    , create_address('TERRE DE LIN, Route de Pulcheux76630 Douvrend', [49.881409, 1.296792])
   ]
   , [
     create_address('Agy Lin Société Coopérative Agricole, La Poterie, 76190 Baons-le-Comte')
@@ -22,7 +22,7 @@ const locationList = [
   , [create_address('Coopérative Agricole LInière de la Région d’Abbeville (CALIRA), 18 Route départementale, 80140 Martainneville, Somme')]
   , [create_address('Coopérative Agricole Linière du Nord de Caen, Rue des Buissons, 14610 Villons-les-Buissons', [49.233856, -0.413225])]
   , [create_address('SOC Cooperative Agricole L.A. Linière, 73 Route de Looberghe, 59630 Bourbourg', [50.930902, 2.225995])]
-  , [create_address('Coopérative de Linière FONTAINE le dun-CANY, Saint Pierre Le Viger, 76740 Seine-Maritime', [49.828339, 0.851765])]
+  , [create_address('Coopérative de Linière FONTAINE le dun-CANY, Saint Pierre Le Viger, 76740 Seine-Maritime', [49.828255,0.853443])]
   , [create_address('COOPÉRATIVE DE TEILLAGE DE LIN DU VERT GALANT, 54 Route du Vert Galant, 76690 Saint-André-sur-Cailly')]
   , [create_address('COOPERATIVE AGRICOLE Lin 2000 SCA, 20 Avenue Saget, 60210 Grandvilliers', [49.6592994,1.9339162])]
   , [create_address("Coopérative Agricole Linière, Rue de l'Étoile, 14630 Cagny", [49.150687, -0.258760])]
@@ -39,8 +39,8 @@ const locationList = [
   , [create_address('Etablissements Devogele S.A.S., Le Buisson, 77120 Chailly-en-Brie')]
   , [create_address('Vanhersecke Frères S.A.R.L, Barrière Française, 59143 Millam', [50.834368,2.277426])]
   , [create_address('Novalin France, Chemin Départemental la Barrière Française, 59143 Millam', [50.8345196,2.2784653])]
-  , [create_address('Teillage de Saint Martin S.A.S, Centre Bourg, 27300 Saint-Martin-du-Tilleul', [49.1105738, 0.5287496])]
-  , [create_address('Linière de Saint Martin, 113 Rue du Puits, 27300 Saint-Martin-du-Tilleul', [49.094317, 0.587164])]
+  , [create_address('Teillage de Saint Martin, Centre Bourg, 27300 Saint-Martin-du-Tilleul', [49.1105738, 0.5287496])]
+  // , [create_address('Linière de Saint Martin, 113 Rue du Puits, 27300 Saint-Martin-du-Tilleul', [49.094317, 0.587164])]
   , [create_address('DeCock S.A., 1 Rue de la Cartonnerie, 59122 Hondschoote', [50.9905296, 2.5610947])]
   , [create_address('Jean Decock S.A., 10 Route de Looweg, 59380 Quaëdypre', [50.9513724, 2.4298771])]
   , [create_address('Société Michel Dewynter SAS, 468 Route de Bourbourg, 59285 Rubrouck')]
@@ -72,7 +72,6 @@ const locationList = [
   , [create_address('ОАО Дворецкий льнозавод производственный участок "Слоним"', [53.0894688,25.3726562])]
   , [create_address('Филиал "Бешенковичский льнозавод" ОАО "Приозерный мир"', [55.075847, 29.508797])]
   , [create_address('ОАО "Верхнедвинский льнозавод" 211620,Витебская область, ГОС а/я № 1, г.Верхнедвинск', [55.749681, 27.933658])]
-  , [create_address('ОАО "Кохановский льнозавод", 211060, Витебская область, Толочинский р-н, п/о Матюхово, д.Зеленый бор', [54.478927, 29.998060])]
   , [create_address('ОАО "Лиозненский льнозавод", 211220, Витебская область,г.п.Лиозно, ул.Гагарина', [55.015689, 30.788225])]
   , [create_address('ОАО "Миорский льнозавод", 211930,Витебская область, ул.Заводская, г.Миоры', [55.611359, 27.621004])]
   , [create_address('ОАО "Мосарлен"', [55.234677, 27.472198])]
