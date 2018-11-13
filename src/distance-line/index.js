@@ -1,5 +1,5 @@
 module.exports = (map) => {
-  var cdPos = [ 
+  var cdPos = [
     {lat:54.23551080446102, lng: 31.470507812500045}
     , {lat:53.56230880620559, lng: 23.675585937500045}
   ];
@@ -41,7 +41,7 @@ module.exports = (map) => {
       'Distance: ' + google.maps.geometry.spherical.computeDistanceBetween(
         new google.maps.LatLng(cdPos[1])
         , new google.maps.LatLng(cdPos[0]))/1000 + ' km';
-    // Set the info window's content and position.
+
     infoWindow.setContent(contentString);
     infoWindow.setPosition(new google.maps.LatLng(cdPos[1]));
     infoWindow.open(map);

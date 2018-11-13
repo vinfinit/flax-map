@@ -1,7 +1,9 @@
 {
   "scripts": {
     "build": "webpack",
-    "load": "node src/build.js"
+    "data-json-parser": "node scripts/json-parser.js france.json belarus.json",
+    "data-kml-parser": "node scripts/kml-parser.js 2018_vlasvelden_in_vlaanderen.kml",
+    "start": "opener dist/index.html"
   },
   "dependencies": {
     "bluebird": "^3.5.1",
@@ -11,6 +13,7 @@
   },
   "devDependencies": {
     "jsonfile": "^4.0.0",
+    "opener": "^1.5.1",
     "webpack": "^3.10.0"
   }
 }

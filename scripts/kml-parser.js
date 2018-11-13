@@ -4,9 +4,10 @@ const Promise = require('bluebird');
 const jsonfile = require('jsonfile');
 const convert = require('xml-js');
 
-const file = './data/belgiumFlax.json';
+const {DATA_SOURCE_PREFIX, DATA_DEST_PREFIX} = require('../config/constants');
+const file = `./${DATA_DEST_PREFIX}/belgiumFlax.json`;
 
-const BelgiumKml = fs.readFileSync(`${__dirname}/../map-data/2018_vlasvelden_in_vlaanderen.kml`);
+const BelgiumKml = fs.readFileSync(`${__dirname}/../${DATA_SOURCE_PREFIX}/2018_vlasvelden_in_vlaanderen.kml`);
 const belgium = convert.xml2js(BelgiumKml, {compact: true});
 
 const flaxBelgium = belgium.kml.Document.Placemark.map(

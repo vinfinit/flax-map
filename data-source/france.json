@@ -1,0 +1,140 @@
+[
+  {
+    "name": "TERRE DE LIN",
+    "branch": [
+      {
+        "name": "TERRE DE LIN 4 Route Linerie, 76590 Crosville-sur-Scie"
+      },
+      {
+        "name": "TERRE DE LIN Les Pistes Zi N 2, 27190 Conches-en-Ouche"
+      },
+      {
+        "name": "TERRE DE LIN Rue du Roumois, 27350 Routot"
+      },
+      {
+        "name": "TERRE DE LIN 12 Rue du Dessous des Bois, 76450 Vittefleur"
+      },
+      {
+        "name": "TERRE DE LIN Route de Pulcheux76630 Douvrend",
+        "lat": 49.881409,
+        "lng": 1.296792
+      }
+    ]
+  },
+  {
+    "name": "Agy Lin Société Coopérative Agricole",
+    "branch": [
+      {
+        "name": "Agy Lin Société Coopérative Agricole, La Poterie, 76190 Baons-le-Comte"
+      },
+      {
+        "name": "Agy Lin Ste Cooperative Agricole, Rue Emile Bénard, 76110 Goderville"
+      }
+    ]
+  },
+  {
+    "name": "COOPÉRATIVE DE TEILLAGE DU PLATEAU DU NEUBOURG,1 Route de Coquerel, 27110 Crosville-la-Vieille"
+  },
+  {
+    "name": "Coopérative Agricole LInière de la Région d’Abbeville (CALIRA), 18 Route départementale, 80140 Martainneville, Somme"
+  },
+  {
+    "name": "Coopérative Agricole Linière du Nord de Caen, Rue des Buissons, 14610 Villons-les-Buissons",
+    "lat": 49.233856,
+    "lng": -0.413225
+  },
+  {
+    "name": "SOC Cooperative Agricole L.A. Linière, 73 Route de Looberghe, 59630 Bourbourg",
+    "lat": 50.930902,
+    "lng": 2.225995
+  },
+  {
+    "name": "Coopérative de Linière FONTAINE le dun-CANY, Saint Pierre Le Viger, 76740 Seine-Maritime",
+    "lat": 49.828255,
+    "lng": 0.853443
+  },
+  {
+    "name": "COOPÉRATIVE DE TEILLAGE DE LIN DU VERT GALANT, 54 Route du Vert Galant, 76690 Saint-André-sur-Cailly"
+  },
+  {
+    "name": "COOPERATIVE AGRICOLE Lin 2000 SCA, 20 Avenue Saget, 60210 Grandvilliers",
+    "lat": 49.6592994,
+    "lng": 1.9339162
+  },
+  {
+    "name": "Coopérative Agricole Linière, Rue de l'Étoile, 14630 Cagny",
+    "lat": 49.150687,
+    "lng": -0.25876
+  },
+  {
+    "name": "OPALIN SCA, Route nationale, 62770 Le Parcq",
+    "lat": 50.374262,
+    "lng": 2.064595
+  },
+  {
+    "name": "Liniere De Bosc Nouvel S.A., Le Bosc Nouvel, 76690 Le Bocasse"
+  },
+  {
+    "name": "Teillage Vandecandelaere S.A.S., 5 Rue de l'Église, 14540 Bourguébus",
+    "lat": 49.120013,
+    "lng": -0.296232
+  },
+  {
+    "name": "Teillage bellet Cie GmbH (Teillage Bellet & Cie S.A.R.L.), Plaine du Château, 76210 Raffetot"
+  },
+  {
+    "name": "Van Robaeys Frères",
+    "branch": [
+      {
+        "name": "Van Robaeys Frères, 83 Rue Saint-Michel, 59122 Killem"
+      },
+      {
+        "name": "Van Robaeys Frères Fortel-en-Artois 62270",
+        "lat": 50.271365,
+        "lng": 2.23155
+      }
+    ]
+  },
+  {
+    "name": "Etablissements Devogele S.A.S., Le Buisson, 77120 Chailly-en-Brie"
+  },
+  {
+    "name": "Vanhersecke Frères S.A.R.L, Barrière Française, 59143 Millam",
+    "lat": 50.834368,
+    "lng": 2.277426
+  },
+  {
+    "name": "Novalin France, Chemin Départemental la Barrière Française, 59143 Millam",
+    "lat": 50.8345196,
+    "lng": 2.2784653
+  },
+  {
+    "name": "Teillage de Saint Martin, Centre Bourg, 27300 Saint-Martin-du-Tilleul",
+    "lat": 49.1105738,
+    "lng": 0.5287496
+  },
+  {
+    "name": "DeCock S.A., 1 Rue de la Cartonnerie, 59122 Hondschoote",
+    "lat": 50.9905296,
+    "lng": 2.5610947
+  },
+  {
+    "name": "Jean Decock S.A., 10 Route de Looweg, 59380 Quaëdypre",
+    "lat": 50.9513724,
+    "lng": 2.4298771
+  },
+  {
+    "name": "Société Michel Dewynter SAS, 468 Route de Bourbourg, 59285 Rubrouck"
+  },
+  {
+    "name": "Liniere Du Ressault - Etablis Lamerant S.A., Rue Alexandre Duval, 27110 Le Neubourg"
+  },
+  {
+    "name": "Teillage Brille-Lamerant, Rue Alexandre Duval, 27110 Le Neubourg"
+  },
+  {
+    "name": "Teillage de lin Lievin  (MADAME SIMONNE LIEVIN), 22 Grand’ Rue  62140 REGNAUVILLE Région: Nord Pas De Calais",
+    "lat": 50.315851,
+    "lng": 2.00809
+  }
+]

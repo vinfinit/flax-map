@@ -1,4 +1,5 @@
-const belgiumFlax = require('../data/belgiumFlax.json');
+const {DATA_DEST_PREFIX} = require('../config/constants');
+const belgiumFlax = require(`../${DATA_DEST_PREFIX}/belgiumFlax.json`);
 
 window.initMap = initMap;
 
@@ -10,7 +11,7 @@ function initMap() {
 
   const drawControl = require('./draw-control')(map);
   // const drawingPane = require('./drawing-manager')(map);
-  // const lienCluster = require('./lien-cluster')(map);
+  const lienCluster = require('./lien-cluster')(map);
   // const distanceLine = require('./distance-line')(map);
   // const dragRectangle = require('./drag-rectangle')(map);
 

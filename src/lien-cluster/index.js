@@ -1,6 +1,7 @@
 const HashMap = require('hashmap');
 
-const data = require('../../data/location.json');
+const {DATA_DEST_PREFIX} = require('../../config/constants');
+const data = require(`../../${DATA_DEST_PREFIX}/belarus`);
 
 module.exports = (map) => {
   let marker_circle_map = new HashMap();
@@ -9,7 +10,7 @@ module.exports = (map) => {
     group.forEach(data => {
       let marker = new google.maps.Marker({
         position: data.location
-        , label: data.label
+        , label: data.name
       });
 
       marker.addListener('dblclick', marker_onclick(marker));
