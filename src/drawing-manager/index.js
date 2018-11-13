@@ -1,5 +1,6 @@
 const geometryutil = require('../../util/geometryutil');
 const mathutil = require('../../util/mathutil');
+const maputil = require('../../util/maputil');
 
 module.exports = (map) => {
   let drawingManager = new google.maps.drawing.DrawingManager({
@@ -68,11 +69,8 @@ module.exports = (map) => {
   }
 
   function area_info(area, position) {
-    let convertArea = mathutil.precisionRound(area/1000000, 3);
-    let contentString = `Area: ${convertArea} km^2`;
-    infoWindow.setContent(contentString);
-    infoWindow.setPosition(position);
-    infoWindow.open(map);
+    infoWindow = maputil.areaPopup(area, position, infoWindow);
+    infoWindow.open();
   }
 
   function overlay_options() {

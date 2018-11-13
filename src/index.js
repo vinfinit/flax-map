@@ -1,3 +1,5 @@
+const belgiumFlax = require('../data/belgiumFlax.json');
+
 window.initMap = initMap;
 
 function initMap() {
@@ -6,13 +8,15 @@ function initMap() {
     center: {lat: 49, lng: 26}
   });
 
-  const drawingManager = require('./drawing-manager')(map);
-  const lienCluster = require('./lien-cluster')(map);
-  const distanceLine = require('./distance-line')(map);
-  const dragRectangle = require('./drag-rectangle')(map);
+  const drawControl = require('./draw-control')(map);
+  // const drawingPane = require('./drawing-manager')(map);
+  // const lienCluster = require('./lien-cluster')(map);
+  // const distanceLine = require('./distance-line')(map);
+  // const dragRectangle = require('./drag-rectangle')(map);
 
   setTimeout(() => {
-    dragRectangle.draw();
-    distanceLine.draw()
+    // dragRectangle.draw();
+    // distanceLine.draw();
+    belgiumFlax.map(drawControl.polygon).map(drawControl.draw)
   }, 3000)
 }

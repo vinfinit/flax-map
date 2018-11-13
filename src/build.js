@@ -1,8 +1,8 @@
 const rp = require('request-promise');
 const Promise = require('bluebird');
 const jsonfile = require('jsonfile');
+const mapsConfig = require('../config/maps-googleapis');
 
-const apiKey = 'AIzaSyDtB-S2ZSrzeOyf8aKdxbhfGjaxTqx1B2k';
 const file = './data/location.json';
 
 const locationList = [
@@ -104,17 +104,16 @@ Promise.map(locationList, locationGroup => {
       return Promise.resolve()
     }
     return rp({
-      uri: `https://maps.googleapis.com/maps/api/geocode/json?address=${factory.uri}&key=${apiKey}`
+      uri: `https://maps.googleapis.com/maps/api/geocode/json?address=${factory.uri}&key=${mapsConfig.apiKey}`
       , json: true
     })
       .then(data => {
-        if (!factory.location) {
-          factory.location = data.results[0].geometry.location
+        if (data.status !== 'OK') {
+          return Promise.reject(new Error(`${data.status} - ${data.error_message}`))
         }
-        // console.log(data.results[0])
+        factory.location = data.results[0].geometry.location
       })
   })
 })
 .then(() => Promise.promisify(jsonfile.writeFile)(file, locationList))
 .catch(err => console.error(err));
-
