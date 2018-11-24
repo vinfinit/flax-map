@@ -1,9 +1,6 @@
 const HashMap = require('hashmap');
 
-const {DATA_DEST_PREFIX} = require('../../config/constants');
-const data = require(`../../${DATA_DEST_PREFIX}/belarus`);
-
-module.exports = (map) => {
+module.exports = (map, data) => {
   let marker_circle_map = new HashMap();
   let markers = [];
   data.forEach(group => {
