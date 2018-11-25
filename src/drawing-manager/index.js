@@ -19,22 +19,25 @@ module.exports = (map) => {
   drawingManager.addListener('polygoncomplete', polygon => {
     const area = geometryutil.area.polygon(polygon);
     const center = geometryutil.center.polygon(polygon);
-    area_info(area, center);
-    polygon.addListener('click', click_handler(polygon, area, center))
+    const infoWindow = maputil.areaPopup(area, center);
+    click_handler(infoWindow)();
+    polygon.addListener('click', click_handler(infoWindow))
   });
 
   drawingManager.addListener('rectanglecomplete', rectangle => {
     const area = geometryutil.area.rectangle(rectangle);
     const center = geometryutil.center.rectangle(rectangle);
-    area_info(area, center);
-    rectangle.addListener('click', click_handler(rectangle, area, center))
+    const infoWindow = maputil.areaPopup(area, center);
+    click_handler(infoWindow)();
+    rectangle.addListener('click', click_handler(infoWindow))
   });
 
   drawingManager.addListener('circlecomplete', circle => {
     const area = geometryutil.area.circle(circle);
     const center = geometryutil.center.circle(circle);
-    area_info(area, center);
-    circle.addListener('click', click_handler(circle, area, center))
+    const infoWindow = maputil.areaPopup(area, center);
+    click_handler(infoWindow)();
+    circle.addListener('click', click_handler(infoWindow))
   });
 
   let curOverlay = null;
@@ -61,16 +64,11 @@ module.exports = (map) => {
     }
   })
 
-  function click_handler(overlay, area, position) {
+  function click_handler(infoWindow) {
     return event => {
-      curOverlay = overlay;
-      area_info(area, position)
+      infoWindow.open(map);
+      setTimeout(() => infoWindow.close(), 5000)
     }
-  }
-
-  function area_info(area, position) {
-    infoWindow = maputil.areaPopup(area, position, infoWindow);
-    infoWindow.open();
   }
 
   function overlay_options() {

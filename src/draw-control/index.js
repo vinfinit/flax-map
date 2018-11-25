@@ -17,11 +17,11 @@ module.exports = (map) => {
     const area = geometryutil.area.polygon(fig);
     const center = geometryutil.center.polygon(fig);
     const infoWindow = maputil.areaPopup(area, center);
-    fig.addListener('click', click_handler(fig, area, center, infoWindow));
+    fig.addListener('click', click_handler(infoWindow));
     return fig
   }
 
-  function click_handler(overlay, area, position, infoWindow) {
+  function click_handler(infoWindow) {
     return event => {
       infoWindow.open(map);
       setTimeout(() => infoWindow.close(), 5000)
