@@ -1,7 +1,8 @@
 {
   "scripts": {
     "build": "webpack",
-    "data-json-parser": "node scripts/json-parser.js france.json belarus.json",
+    "data-json-parser": "node scripts/json-parser.js france.json belarus.json belgium.json",
+    "belgium": "node scripts/json-parser.js belgium.json",
     "data-kml-parser": "node scripts/kml-parser.js 2018_vlasvelden_in_vlaanderen.kml",
     "start": "opener dist/index.html"
   },

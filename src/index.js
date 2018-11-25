@@ -4,7 +4,9 @@ const {DATA_DEST_PREFIX} = require('../config/constants');
 
 const belarusFlax = require(`../${DATA_DEST_PREFIX}/belarus`);
 const franceFlax = require(`../${DATA_DEST_PREFIX}/france`);
-const belgiumFlax = require(`../${DATA_DEST_PREFIX}/belgiumFlax.json`);
+const belgiumFlax = require(`../${DATA_DEST_PREFIX}/belgium`);
+
+const belgiumFlaxFields = require(`../${DATA_DEST_PREFIX}/belgiumFlax.json`);
 
 window.initMap = initMap;
 
@@ -15,15 +17,16 @@ function initMap() {
   });
 
   const drawControl = require('./draw-control')(map);
-  // const drawingPane = require('./drawing-manager')(map);
-  const belaruxLienCluster = flaxCluster(map, belarusFlax);
-  const franceLienCluster = flaxCluster(map, franceFlax);
+  const drawingPane = require('./drawing-manager')(map);
+  const belaruxFlaxCluster = flaxCluster(map, belarusFlax);
+  const franceFlaxCluster = flaxCluster(map, franceFlax);
+  const belgiumFlaxCluster = flaxCluster(map, belgiumFlax);
   // const distanceLine = require('./distance-line')(map);
   // const dragRectangle = require('./drag-rectangle')(map);
 
   setTimeout(() => {
     // dragRectangle.draw();
     // distanceLine.draw();
-    belgiumFlax.map(drawControl.polygon).map(drawControl.draw)
+    belgiumFlaxFields.map(drawControl.polygon).map(drawControl.draw)
   }, 3000)
 }
