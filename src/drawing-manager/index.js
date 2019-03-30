@@ -6,7 +6,7 @@ module.exports = (map) => {
   let drawingManager = new google.maps.drawing.DrawingManager({
     drawingControlOptions: {
       position: google.maps.ControlPosition.TOP_CENTER
-      , drawingModes: ['polygon', 'circle', 'rectangle']
+      , drawingModes: ['marker', 'polyline', 'polygon', 'circle', 'rectangle']
     }
     , circleOptions: overlay_options()
     , polygonOptions: overlay_options()
@@ -14,30 +14,43 @@ module.exports = (map) => {
   });
   drawingManager.setMap(map);
 
-  let infoWindow = new google.maps.InfoWindow();
 
-  drawingManager.addListener('polygoncomplete', polygon => {
-    const area = geometryutil.area.polygon(polygon);
-    const center = geometryutil.center.polygon(polygon);
-    const infoWindow = maputil.areaPopup(area, center);
-    click_handler(infoWindow)();
-    polygon.addListener('click', click_handler(infoWindow))
+  drawingManager.addListener('markercomplete', overlay => {
+    overlay.addListener('click', click_handler(overlay))
+  })
+
+  drawingManager.addListener('polylinecomplete', overlay => {
+    const polyPath = geometryutil.polyline.compute(overlay);
+    let total = 0;
+    polyPath.forEach(i => {
+      total += i.distance;
+      const infoWindow = maputil.popup(`
+        <p><i>Length: </i>${mathutil.precisionRound(i.distance/1000, 3)}km</p>
+        <p><i>Total: </i>${mathutil.precisionRound(total/1000 , 3)}km</p>
+        `, i.position);
+      overlay.addListener('click', click_handler({ overlay, infoWindow }))
+    })
   });
 
-  drawingManager.addListener('rectanglecomplete', rectangle => {
-    const area = geometryutil.area.rectangle(rectangle);
-    const center = geometryutil.center.rectangle(rectangle);
+  drawingManager.addListener('polygoncomplete', overlay => {
+    const area = geometryutil.area.polygon(overlay);
+    const center = geometryutil.center.polygon(overlay);
     const infoWindow = maputil.areaPopup(area, center);
-    click_handler(infoWindow)();
-    rectangle.addListener('click', click_handler(infoWindow))
+    overlay.addListener('click', click_handler({ overlay, infoWindow }))
   });
 
-  drawingManager.addListener('circlecomplete', circle => {
-    const area = geometryutil.area.circle(circle);
-    const center = geometryutil.center.circle(circle);
+  drawingManager.addListener('rectanglecomplete', overlay => {
+    const area = geometryutil.area.rectangle(overlay);
+    const center = geometryutil.center.rectangle(overlay);
     const infoWindow = maputil.areaPopup(area, center);
-    click_handler(infoWindow)();
-    circle.addListener('click', click_handler(infoWindow))
+    overlay.addListener('click', click_handler({ overlay, infoWindow }))
+  });
+
+  drawingManager.addListener('circlecomplete', overlay => {
+    const area = geometryutil.area.circle(overlay);
+    const center = geometryutil.center.circle(overlay);
+    const infoWindow = maputil.areaPopup(area, center);
+    overlay.addListener('click', click_handler({ overlay, infoWindow }))
   });
 
   let curOverlay = null;
@@ -55,8 +68,7 @@ module.exports = (map) => {
       case 46:
         if (curOverlay) {
           curOverlay.setMap(null);
-          curOverlay = null;
-          infoWindow.close()
+          curOverlay = null
         }
         break;
       default:
@@ -64,11 +76,16 @@ module.exports = (map) => {
     }
   })
 
-  function click_handler(infoWindow) {
-    return event => {
-      infoWindow.open(map);
-      setTimeout(() => infoWindow.close(), 5000)
-    }
+  function click_handler({ overlay, infoWindow }) {
+    const clHandler = event => {
+      curOverlay = overlay;
+      if (infoWindow) {
+        infoWindow.open(map);
+        setTimeout(() => infoWindow.close(), 5000)
+      }
+    };
+    clHandler();
+    return clHandler
   }
 
   function overlay_options() {

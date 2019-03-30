@@ -40,4 +40,16 @@ center.polygon = polygon => {
   return bounds.getCenter()
 }
 
-module.exports = {area, center}
+let polyline = Object.create(null);
+
+polyline.compute = overlay => {
+  const path = overlay.getPath().getArray();
+  const res = [];
+  for (let i = 1; i < path.length; i++) {
+    let [prev, cur] = [path[i-1], path[i]];
+    res.push({ distance: google.maps.geometry.spherical.computeLength([prev, cur]), position: cur })
+  }
+  return res
+}
+
+module.exports = { area, center, polyline }
