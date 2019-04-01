@@ -3,4 +3,11 @@ function precisionRound(number, precision) {
   return Math.round(number * factor) / factor;
 }
 
-module.exports = {precisionRound}
+function arcTangent(x) {
+  return Math.atan(x) * 180 / Math.PI;
+}
+
+module.exports = {
+  precisionRound,
+  arcTangent
+}

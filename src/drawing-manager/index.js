@@ -1,6 +1,7 @@
 const geometryutil = require('../../util/geometryutil');
 const mathutil = require('../../util/mathutil');
 const maputil = require('../../util/maputil');
+const fillPattern = require('../fill-pattern');
 
 module.exports = (map) => {
   let drawingManager = new google.maps.drawing.DrawingManager({
@@ -36,6 +37,8 @@ module.exports = (map) => {
     const area = geometryutil.area.polygon(overlay);
     const center = geometryutil.center.polygon(overlay);
     const infoWindow = maputil.areaPopup(area, center);
+    const lines = fillPattern.polylines(overlay.getPath().getArray());
+    lines.map(line => line.setMap(map));
     overlay.addListener('click', click_handler({ overlay, infoWindow }))
   });
 
