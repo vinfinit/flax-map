@@ -1,64 +1,8 @@
 const mathutil = require('../../util/mathutil');
+const geometryutil = require('../../util/geometryutil');
 
 const ANGLE_WINDOW = 5;
-
-function rectLines(ne, sw, k = 0, path = []) {
-  const rectPath = [
-    {lat: ne.lat, lng: ne.lng},
-    {lat: ne.lat, lng: sw.lng},
-    {lat: sw.lat, lng: sw.lng},
-    {lat: sw.lat, lng: ne.lng}
-  ];
-  const diffLat = ne.lat() - sw.lat();
-  const diffLng = ne.lng() - sw.lng();
-
-  let stepLat, stepLng;
-  if (k < 0) {
-    stepLat = diffLat/10;
-    stepLng = -(stepLat/k);
-  } else {
-    stepLng = diffLng/10;
-    stepLat = stepLng*k;
-  }
-  let [nLat, nLng] = [Math.ceil(diffLat / stepLat), Math.ceil(diffLng / stepLng)];
-  for (let i = 1; nLat + nLng > 50; i+=0.1) {
-    [stepLat, stepLng] = [i*stepLat, i*stepLng];
-    [nLat, nLng] = [Math.ceil(diffLat / stepLat), Math.ceil(diffLng / stepLng)];
-  }
-
-  const res = [];
-
-  for (let latFlag = 0; latFlag <= 1; latFlag++) {
-    for (let i = 0; i <= (latFlag ? nLat : nLng); i++) {
-      const line = getLineInRectangle({
-        ne,
-        sw,
-        i,
-        k,
-        step: (latFlag ? stepLat : stepLng),
-        diffLat,
-        diffLng,
-        isLatStep: latFlag
-      }).map(({lat, lng}) => new google.maps.LatLng({lat, lng}));
-
-      const crossLine = intersect(line, path);
-
-      if (crossLine.length) {
-        const polyLine = new google.maps.Polyline({
-          path: crossLine,
-          geodesic: true,
-          strokeColor: '#FF0000',
-          strokeOpacity: 1.0,
-          strokeWeight: 2
-        });
-
-        res.push(polyLine);
-      }
-    }
-  }
-
-  return res;
-}
+const COMBINE_SIZE = 2.4; // meters
 
 function polylines(path) {
   const lines = [];
@@ -73,7 +17,7 @@ function polylines(path) {
     });
   }
 
-  // clustering by angle +- 5
+  // clustering by ANGLE_WINDOW
   const cluster = [];
   for (let i = 0; i < lines.length; i++) {
     cluster.push({lines: [lines[i]]});
@@ -94,9 +38,91 @@ function polylines(path) {
   // draw lines
   const baseLine = longestCluster.lines.reduce(
     (prev, cur) => cur.length > prev.length ? cur : prev);
+  const otherLines = lines.filter(line => !longestCluster.lines.some(lLine => lLine === line));
   const polygon = wrapPolygon(path);
 
-  return rectLines(polygon.ne, polygon.sw, baseLine.k, path);
+  return rectLines(polygon.ne, polygon.sw, baseLine.k, otherLines.map(({line}) => line));
+}
+
+function rectLines(ne, sw, k = 0, borderLines = []) {
+  const rectPath = [
+    {lat: ne.lat, lng: ne.lng},
+    {lat: ne.lat, lng: sw.lng},
+    {lat: sw.lat, lng: sw.lng},
+    {lat: sw.lat, lng: ne.lng}
+  ];
+  const diffLat = ne.lat() - sw.lat();
+  const diffLng = ne.lng() - sw.lng();
+
+  let stepLat, stepLng;
+  if (k < 0) {
+    stepLat = diffLat/100;
+    stepLng = -(stepLat/k);
+  } else {
+    stepLng = diffLng/100;
+    stepLat = stepLng*k;
+  }
+  let [nLat, nLng] = [Math.ceil(diffLat / stepLat), Math.ceil(diffLng / stepLng)];
+  for (let i = 1; nLat + nLng > 500; i+=0.1) {
+    [stepLat, stepLng] = [i*stepLat, i*stepLng];
+    [nLat, nLng] = [Math.ceil(diffLat / stepLat), Math.ceil(diffLng / stepLng)];
+  }
+
+  const res = [];
+  geometryutil.distance({lat: ne.lat(), lng: ne.lng()}, {lat: ne.lat(), lng: ne.lng()+stepLng});
+  const lngStepMeters = geometryutil.distance(
+    {lat: ne.lat(), lng: ne.lng()},
+    {lat: ne.lat(), lng: ne.lng()+stepLng}); // in meters
+  const latStepMeters = geometryutil.distance(
+    {lat: ne.lat(), lng: ne.lng()},
+    {lat: ne.lat()+stepLat, lng: ne.lng()});
+  const kMeters = latStepMeters / lngStepMeters;
+
+  const businessStat = {
+    nLines: 0,
+    calculatedNLines: 0,
+    step: lngStepMeters / Math.sqrt(1+1/Math.pow(kMeters, 2)),
+    combineSize: COMBINE_SIZE
+  };
+
+  for (let latFlag = 0; latFlag <= 1; latFlag++) {
+    for (let i = 0; i <= (latFlag ? nLat : nLng); i++) {
+      const line = getLineInRectangle({
+        ne,
+        sw,
+        i,
+        k,
+        step: (latFlag ? stepLat : stepLng),
+        diffLat,
+        diffLng,
+        isLatStep: latFlag
+      }).map(({lat, lng}) => new google.maps.LatLng({lat, lng}));
+
+      const crossLine = intersect(line, borderLines);
+
+      if (crossLine.length == 2) {
+        businessStat.nLines++;
+        if (i % 10 === 0) {
+          const polyLine = new google.maps.Polyline({
+            path: crossLine,
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+          });
+
+          res.push(polyLine);
+        }
+      }
+    }
+  }
+
+  businessStat.calculatedNLines = Math.floor(businessStat.nLines*(businessStat.step/businessStat.combineSize));
+  // businessStat.wastedDistance = borderLines
+  //   .map(line => geometryutil.distance(line[0], line[1]))
+  //   .reduce((a, b) => a + b, 0);
+  businessStat.wastedDistance = 280 / 14 * businessStat.calculatedNLines;
+  return {lines: res, bs: businessStat};
 }
 
 function wrapPolygon(path) {
@@ -113,9 +139,9 @@ function wrapPolygon(path) {
   }
 }
 
-function intersect(line, path) {
+function intersect(line, borderLines) {
   const res = [];
-  splitPathToLines(path).forEach(pathLine => {
+  borderLines.forEach(pathLine => {
     const [x1, y1,
       x2, y2,
       x3, y3,
@@ -188,6 +214,5 @@ function getLineInRectangle({ne, sw, step, k, i, diffLat, diffLng, isLatStep = t
 }
 
 module.exports = {
-  rectLines,
   polylines
 };

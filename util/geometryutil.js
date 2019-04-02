@@ -52,4 +52,21 @@ polyline.compute = overlay => {
   return res
 }
 
-module.exports = { area, center, polyline }
+function call(f) {
+  if (typeof f === 'function') {
+    return f()
+  }
+  return f
+}
+
+function distance(pointA, pointB) {
+  return polyline.compute(new google.maps.Polyline({
+    path: [
+      {lat: call(pointA.lat), lng: call(pointA.lng)},
+      {lat: call(pointB.lat), lng: call(pointB.lng)}
+    ],
+    geodesic: true
+  }))[0].distance
+}
+
+module.exports = { area, center, polyline, distance }

@@ -36,9 +36,16 @@ module.exports = (map) => {
   drawingManager.addListener('polygoncomplete', overlay => {
     const area = geometryutil.area.polygon(overlay);
     const center = geometryutil.center.polygon(overlay);
-    const infoWindow = maputil.areaPopup(area, center);
-    const lines = fillPattern.polylines(overlay.getPath().getArray());
+    const {lines, bs} = fillPattern.polylines(overlay.getPath().getArray());
     lines.map(line => line.setMap(map));
+    bs.efficientDistance = area / bs.combineSize;
+    const infoWindow = maputil.areaPopup(area, center, null, `
+      <p><i>Combine size</i>: ${bs.combineSize}</p>
+      <p><i>Number of lines</i>: ${bs.calculatedNLines}</p>
+      <p><i>Efficient distance</i>: ${mathutil.precisionRound(bs.efficientDistance, 3)} m</p>
+      <p><i>Wasted distance</i>: ${mathutil.precisionRound(bs.wastedDistance, 3)} m</p>
+      <p><i>Efficiency</i>: ${mathutil.precisionRound(bs.efficientDistance / (bs.efficientDistance + bs.wastedDistance) * 100, 1)}%</p>
+      `);
     overlay.addListener('click', click_handler({ overlay, infoWindow }))
   });
 
@@ -84,7 +91,7 @@ module.exports = (map) => {
       curOverlay = overlay;
       if (infoWindow) {
         infoWindow.open(map);
-        setTimeout(() => infoWindow.close(), 5000)
+        setTimeout(() => infoWindow.close(), 15000)
       }
     };
     clHandler();
