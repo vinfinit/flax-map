@@ -2,7 +2,7 @@ const mathutil = require('../../util/mathutil');
 const geometryutil = require('../../util/geometryutil');
 
 const ANGLE_WINDOW = 5;
-const COMBINE_SIZE = 2.4; // meters
+const COMBINE_SIZE = 2.6; // meters
 
 function polylines(path) {
   const lines = [];
@@ -121,7 +121,7 @@ function rectLines(ne, sw, k = 0, borderLines = []) {
   // businessStat.wastedDistance = borderLines
   //   .map(line => geometryutil.distance(line[0], line[1]))
   //   .reduce((a, b) => a + b, 0);
-  businessStat.wastedDistance = 280 / 14 * businessStat.calculatedNLines;
+  businessStat.wastedDistance = 52 * businessStat.calculatedNLines;
   return {lines: res, bs: businessStat};
 }
 

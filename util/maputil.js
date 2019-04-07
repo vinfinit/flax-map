@@ -10,8 +10,8 @@ function popup(content, position, infoWindow = null, extraContent = '') {
 }
 
 function areaPopup(area, position, infoWindow = null, extraContent = null) {
-  let roundArea = mathutil.precisionRound(area/1000000, 3);
-  let contentString = `<p><i>Area</i>: ${roundArea} km^2</p>`;
+  let roundArea = mathutil.precisionRound(area/10000, 3);
+  let contentString = `<p><i>Area</i>: ${roundArea} ha</p>`;
 
   return popup(contentString, position, infoWindow, extraContent);
 }
