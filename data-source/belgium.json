@@ -38,5 +38,40 @@
     "name": "van Looij Holding B.V.",
     "lat": 51.256188,
     "lng": 4.051328
+  },
+  {
+    "name": "Rue Docteur Emile Neuville 1 B",
+    "lat": 50.6095374,
+    "lng": 5.2412515
+  },
+  {
+    "name": "DEVANTA BVBA",
+    "lat": 50.8844371,
+    "lng": 3.3988406
+  },
+  {
+    "name": "Vandecasteele Leon nv",
+    "lat": 50.8923154,
+    "lng": 3.2333623
+  },
+  {
+    "name": "Roterijstraat 3",
+    "lat": 50.932357,
+    "lng": 3.328366
+  },
+  {
+    "name": "Vanacker Rumbeke bvba",
+    "lat": 50.9157536,
+    "lng": 3.1700783
+  },
+  {
+    "name": "Vlasbedrijf Verhalle Nv",
+    "lat": 50.9243725,
+    "lng": 3.4538628
+  },
+  {
+    "name": "Wavalin cvba",
+    "lat": 50.965500,
+    "lng": 3.454847
   }
 ]

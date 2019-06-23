@@ -6,7 +6,8 @@ const belarusFlax = require(`../${DATA_DEST_PREFIX}/belarus`);
 const franceFlax = require(`../${DATA_DEST_PREFIX}/france`);
 const belgiumFlax = require(`../${DATA_DEST_PREFIX}/belgium`);
 
-const belgiumFlaxFields = require(`../${DATA_DEST_PREFIX}/belgiumFlax.json`);
+const belgium2018 = require(`../${DATA_DEST_PREFIX}/2018_vlasvelden_in_vlaanderen.json`);
+const belgium2019 = require(`../${DATA_DEST_PREFIX}/2019_vlasvelden_in_vlaanderen.json`);
 
 window.initMap = initMap;
 
@@ -23,10 +24,31 @@ function initMap() {
   const belgiumFlaxCluster = flaxCluster(map, belgiumFlax);
   // const distanceLine = require('./distance-line')(map);
   // const dragRectangle = require('./drag-rectangle')(map);
+  const customControl = require('./custom-control')(map,
+    Control(belgium2018, 'Belgium 2018', '#ef3bff', '#ff0bba'),
+    Control(belgium2019, 'Belgium 2019', '#fff064', '#ffd20a')
+  );
 
-  setTimeout(() => {
-    // dragRectangle.draw();
-    // distanceLine.draw();
-    belgiumFlaxFields.map(drawControl.polygon).map(drawControl.draw)
-  }, 3000)
+  function Control(fields, name, color, strokeColor) {
+    return {
+      name,
+      color,
+      handler: toggleFields(fields, color, strokeColor)
+    }
+  }
+
+  function toggleFields(fields, color, strokeColor) {
+    let active = false;
+    let figList = [];
+    return () => {
+      if (!active) {
+        figList = fields.map(paths => drawControl.polygon({paths, color, strokeColor}));
+        figList.map(drawControl.draw);
+      } else {
+        figList.map(drawControl.unset);
+        figList = [];
+      }
+      return active = !active;
+    }
+  }
 }

@@ -6,12 +6,20 @@ module.exports = (map) => {
     fig.setMap(map)
   }
 
-  function polygon(paths) {
+  function unset(fig) {
+    fig.setMap(null)
+  }
+
+  function polygon({
+    paths = [],
+    color = '#04fbff',
+    strokeColor = '#02d5ff'
+  } = {}) {
     const fig = new google.maps.Polygon({
       paths,
-      fillColor: '#04fbff',
+      fillColor: color,
       fillOpacity: 0.4,
-      strokeColor: '#02d5ff',
+      strokeColor: strokeColor,
       strokeWeight: 2
     });
     const area = geometryutil.area.polygon(fig);
@@ -30,6 +38,7 @@ module.exports = (map) => {
 
   return {
     draw,
-    polygon
+    polygon,
+    unset
   }
 }
